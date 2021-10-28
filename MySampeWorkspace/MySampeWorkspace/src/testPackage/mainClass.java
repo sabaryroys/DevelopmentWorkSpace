@@ -1,8 +1,9 @@
-package testPackage;
+package src.testPackage;
 
 //import java.util.Scanner;
-
-public class Test {
+//just using this as main class to run all others
+//updated class Test to mainClass
+public class mainClass {
 
 	public static void main(String[] args) {
 		readNumber rn = new readNumber();
@@ -16,4 +17,4 @@ public class Test {
 //commeted 
 //added a new comment to this code
 //This is commited to dev repo
-//hgfjhgf
+//
