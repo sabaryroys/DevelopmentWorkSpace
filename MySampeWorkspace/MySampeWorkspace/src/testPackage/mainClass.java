@@ -14,7 +14,7 @@ public class mainClass {
 	}
 }
 	  
-//commeted 
+//Commented 
 //added a new comment to this code
 //This is commited to dev repo
 //

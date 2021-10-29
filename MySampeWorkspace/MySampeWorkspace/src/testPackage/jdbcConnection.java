@@ -1,7 +1,6 @@
 package src.testPackage;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 import java.io.*;
 
 
@@ -9,7 +8,13 @@ import java.io.*;
 public class jdbcConnection {
 	private String filePath = "C:\\Users\\Sabari Roy\\Desktop\\files\\";
 	private String fileName = "loc_nbr.txt";
-	
+	private String fieldSeperator = ";";
+	private Integer loc_updater_value = 5;
+	public void mainFunc()
+	{
+		callJdbcCon();
+		readFile();
+	}
 	
 		public void callJdbcCon()
 		{
@@ -19,14 +24,12 @@ public class jdbcConnection {
 			Statement smt = con.createStatement();
 			//smt.execute("insert into sc_dev.fct_target_dtl values(104,'NEW JERSY','Y',157982,157980,157890)");
 			System.out.println("Connected to db successfully");
-			ResultSet rs = smt.executeQuery("select loc_nbr from sc_dev.fct_target_dtl");
+			ResultSet rs = smt.executeQuery("select loc_nbr,loc_name from sc_dev.fct_target_dtl");
 			createFile();
 			
 			while(rs.next())
-			{
-			Integer loc_nbr;
-			loc_nbr = rs.getInt(1);		
-			writeFile(loc_nbr);
+			{ 		
+			writeFile(rs.getInt(1),rs.getString(2));
 			}
 			con.close();
 			}
@@ -61,17 +64,17 @@ public class jdbcConnection {
 						e.printStackTrace();
 					}
 		}
-		private void writeFile(Integer loc_nbr)
+		private void writeFile(Integer loc_nbr,String loc_name)
 		{
 			try {
 			Writer writer = new BufferedWriter(new FileWriter(filePath+fileName,true));
 				//FileWriter writerObj = new FileWriter(filePath+fileName);
 						if(fileEmptyCheck())
 			{
-				writer.write("LOC_NBR"+"\r\n");
+				writer.write("LOC_NBR"+fieldSeperator+"LOC_NAME"+fieldSeperator+"LOCATIOON_NUMBER_UPDATED"+"\r\n");
 			}
 			{
-			writer.append(loc_nbr.toString()+" \r\n");
+			writer.append(loc_nbr.toString()+fieldSeperator+loc_name+fieldSeperator+loc_nbr * loc_updater_value +"\r\n");
 			  		writer.close();
 		
 			//writer.append("Hello hello\\r\\n");
@@ -97,6 +100,42 @@ public class jdbcConnection {
 				return false;
 			}
 			}
+		private void readFile()
+		{
+			String s1 = "";
+			
+			
+			File file = new File(filePath+fileName);
+			
+				if (file.exists())
+				{
+					try 
+					{
+						Scanner sc = new Scanner(file);
+						sc.nextLine();
+						while(sc.hasNextLine())
+							
+						{
+							s1 = sc.nextLine();
+							String[] arr = s1.split(fieldSeperator);
+							
+								System.out.println("LOCATION NUMBER : "+arr[0]);
+									System.out.println("LOCATION NAME : "+arr[1]);
+							
+						}
+						sc.close();
+					} 
+					catch (FileNotFoundException e) 
+					{
+					 System.out.println("File not found");
+						//e.printStackTrace();
+					}
+					
+				}
+					
+			
+			
+		}
 		}
 
 
