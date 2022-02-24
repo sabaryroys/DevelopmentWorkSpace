@@ -17,7 +17,7 @@ public class CielAndFloor {
 		sc.close();
 		cAf(inputValue);
 		
-
+  
 	}
 	
 	public static Integer cAf(double inputValue)
