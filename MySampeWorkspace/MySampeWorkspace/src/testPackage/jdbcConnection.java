@@ -16,7 +16,7 @@ public class jdbcConnection {
 		readFile();
 	}
 	
-		public void callJdbcCon()
+		private void callJdbcCon()
 		{
 			try {
 			//Class.forName("com.mysql.jdbc.Driver");
@@ -71,7 +71,7 @@ public class jdbcConnection {
 				//FileWriter writerObj = new FileWriter(filePath+fileName);
 						if(fileEmptyCheck())
 			{
-				writer.write("LOC_NBR"+fieldSeperator+"LOC_NAME"+fieldSeperator+"LOCATIOON_NUMBER_UPDATED"+"\r\n");
+				writer.write("LOC_NBR"+fieldSeperator+"LOC_NAME"+fieldSeperator+"LOCATION_NUMBER_UPDATED"+"\r\n");
 			}
 			{
 			writer.append(loc_nbr.toString()+fieldSeperator+loc_name+fieldSeperator+loc_nbr * loc_updater_value +"\r\n");
@@ -101,6 +101,7 @@ public class jdbcConnection {
 			}
 			}
 		private void readFile()
+
 		{
 			String s1 = "";
 			
@@ -136,7 +137,12 @@ public class jdbcConnection {
 			
 			
 		}
+		
+		
+		
 		}
+
+
 
 
 
